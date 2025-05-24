@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // Import screen files
+import 'screens/login_screen.dart';
+import 'screens/free_home_page.dart';
+import 'screens/premium_home_page.dart';
 import 'screens/water_control_screen.dart';
 import 'screens/environment_control_screen.dart';
 import 'screens/soil_nutrition_screen.dart';
@@ -23,104 +27,64 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        // Define our custom theme settings
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
+          primary: Colors.green,
+          secondary: Colors.blue,
+          tertiary: Colors.deepPurple,
+        ),
+        // Card theme
+        cardTheme: CardTheme(
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        // Elevated button theme
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 2,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+        // Text button theme
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
+        ),
+        // App bar theme
+        appBarTheme: AppBarTheme(
+          centerTitle: false,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.white,
+        ),
+        // Input decoration theme (for text fields)
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
       ),
-      home: const HomePage(),
+      // Set LoginScreen as the default landing page
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
+// Keeping this for backward compatibility, but not used anymore
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plant Care System'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Select a System',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
-            const SizedBox(height: 30),
-
-            // Water Control Button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const WaterControlScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(250, 60),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                'Water Control',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Environment Control Button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const EnvironmentControlScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(250, 60),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                'Environment Control',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Soil Nutrition Button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SoilNutritionScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(250, 60),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                'Soil Nutrition',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const PremiumHomePage();
   }
 }
