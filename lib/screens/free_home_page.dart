@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'feature_development_screen.dart';
 import 'free_water_control_screen.dart';
 import 'premium_home_page.dart';
+import 'soil_nutrient_screen.dart';
+import 'free_environment_monitor_screen.dart';
 
 class FreeHomePage extends StatelessWidget {
   const FreeHomePage({Key? key}) : super(key: key);
@@ -100,65 +102,110 @@ class FreeHomePage extends StatelessWidget {
 
                       const SizedBox(height: 16),
 
-                      // Environment Control Card (Coming Soon)
-                      _buildFeatureCard(
-                        context,
-                        icon: Icons.thermostat,
-                        title: 'Environment Monitor',
-                        description: 'Track temperature and humidity (Premium Only)',
-                        isAvailable: false,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const FeatureDevelopmentScreen(
-                                featureName: 'Environment Monitor',
-                                featureIcon: Icons.thermostat,
+                      // Environment Monitor Card (Now Available)
+                      // Creating the Environment Monitor card directly to fix the overlay issue
+                      Card(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(
+                            color: Colors.green.withOpacity(0.5),
+                            width: 1,
+                          ),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const FreeEnvironmentMonitorScreen(),
                               ),
+                            );
+                          },
+                          borderRadius: BorderRadius.circular(12),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.green.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Icon(
+                                    Icons.thermostat,
+                                    color: Colors.green,
+                                    size: 32,
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Environment Monitor',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.only(left: 8),
+                                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                            decoration: BoxDecoration(
+                                              color: Colors.green,
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            child: const Text(
+                                              'Available',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        'Analyze your plant growing environment',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.chevron_right,
+                                  color: Colors.green,
+                                ),
+                              ],
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
 
                       const SizedBox(height: 16),
 
-                      // Soil Nutrition Card (Coming Soon)
+                      // Soil Nutrition Card (Now Available)
                       _buildFeatureCard(
                         context,
                         icon: Icons.grass,
                         title: 'Soil Nutrition',
-                        description: 'Analyze soil quality (Premium Only)',
-                        isAvailable: false,
+                        description: 'Learn about soil nutrients and deficiencies',
+                        isAvailable: true,
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const FeatureDevelopmentScreen(
-                                featureName: 'Soil Nutrition',
-                                featureIcon: Icons.grass,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Crop Disease Detection Card (Coming Soon)
-                      _buildFeatureCard(
-                        context,
-                        icon: Icons.healing,
-                        title: 'Crop Disease Detection',
-                        description: 'Identify plant diseases (Premium Only)',
-                        isAvailable: false,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const FeatureDevelopmentScreen(
-                                featureName: 'Crop Disease Detection',
-                                featureIcon: Icons.healing,
-                              ),
+                              builder: (context) => const SoilNutrientScreen(),
                             ),
                           );
                         },
