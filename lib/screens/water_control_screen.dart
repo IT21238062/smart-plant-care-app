@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import '../models/water_sensor_data.dart';
+import 'prediction_history_screen.dart'; // Import the history screen we'll create next
 
 class WaterControlScreen extends StatefulWidget {
   const WaterControlScreen({Key? key}) : super(key: key);
@@ -209,6 +210,21 @@ class _WaterControlScreenState extends State<WaterControlScreen> {
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         elevation: 4,
+        actions: [
+          // History button
+          IconButton(
+            icon: Icon(Icons.history),
+            tooltip: 'Prediction History',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PredictionHistoryScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
